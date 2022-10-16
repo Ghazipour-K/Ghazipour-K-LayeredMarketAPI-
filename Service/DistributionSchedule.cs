@@ -11,11 +11,6 @@ namespace Market.Service
     {
         private readonly IGenericRepository<DistributionScheduleTable> _genericDistributionScheduleRepository = null;
 
-        public DistributionSchedule()
-        {
-            _genericDistributionScheduleRepository = new GenericRepository<DistributionScheduleTable>();
-        }
-
         public DistributionSchedule(IGenericRepository<DistributionScheduleTable> repository)
         {
             _genericDistributionScheduleRepository = repository;

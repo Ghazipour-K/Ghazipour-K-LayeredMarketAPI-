@@ -8,10 +8,6 @@ namespace Market.Service
     public class Product : IProduct
     {
         private readonly IGenericRepository<ProductTable> _genericProductRepository = null;
-        public Product()
-        {
-            _genericProductRepository = new GenericRepository<ProductTable>();
-        }
 
         public Product(IGenericRepository<ProductTable> repository)
         {

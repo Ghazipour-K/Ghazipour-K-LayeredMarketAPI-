@@ -10,11 +10,6 @@ namespace Market.Service
     {
         private IGenericRepository<ShoppingCardTable> _genericShoppingCardRepository = null;
 
-        public ShoppingCard()
-        {
-            _genericShoppingCardRepository = new GenericRepository<ShoppingCardTable>();
-        }
-
         public ShoppingCard(IGenericRepository<ShoppingCardTable> repository)
         {
             _genericShoppingCardRepository = repository;

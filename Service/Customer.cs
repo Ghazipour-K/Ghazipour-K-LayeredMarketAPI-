@@ -10,11 +10,6 @@ namespace Market.Service
     {
         private readonly IGenericRepository<CustomerTable> _genericCustomerRepository = null;
         private readonly ICustomerRepository _customerRepository = null;
-        public  Customer() 
-        {
-            _genericCustomerRepository = new GenericRepository<CustomerTable>();
-            _customerRepository = new CustomerRepository();
-        }
 
         public Customer(IGenericRepository<CustomerTable> repository)
         {

@@ -10,12 +10,7 @@ namespace Market.Service
     {
         private readonly IGenericRepository<AdminTable>  _genericAdminRepository = null;
         private readonly IAdminRepository _adminRepository = null;
-        public Admin()
-        {
-            _genericAdminRepository = new GenericRepository<AdminTable>();
-            _adminRepository = new AdminRepository();
-        }
-
+        
         public Admin(IGenericRepository<AdminTable> repository)
         {
             _genericAdminRepository = repository;
