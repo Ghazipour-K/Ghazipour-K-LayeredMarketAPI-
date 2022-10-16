@@ -13,6 +13,11 @@ namespace Market.Service
             _genericProductRepository = new GenericRepository<ProductTable>();
         }
 
+        public Product(IGenericRepository<ProductTable> repository)
+        {
+            _genericProductRepository = repository;
+        }
+
         public List<ProductViewModel> GetAll()
         {
             List<ProductViewModel> products;

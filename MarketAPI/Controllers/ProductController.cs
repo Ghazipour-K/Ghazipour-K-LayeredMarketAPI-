@@ -1,27 +1,43 @@
 ﻿using System;
 using System.Web.Http;
 using Market.Model;
+using Market.Repository;
 using Market.Service;
+using Unity;
 
-namespace Market.Controllers
+namespace Market.Controller
 {
     public class ProductController : ApiController
     {
         [HttpGet]
         public IHttpActionResult GetAllProducts()
         {
-            return Ok(new Product().GetAll());
+            //return Ok(new Product(new GenericRepository<ProductTable>()).GetAll());
+            return Ok(UnityConfig.container.Resolve<Product>().GetAll());
+
         }
 
-        public IHttpActionResult PostAddProduct(ProductViewModel productView)
+        public IHttpActionResult PostAddProduct(ProductDTO productDTO)
         {
-            if (!ModelState.IsValid || productView is null) return BadRequest("Bad Request!");
+            if (!ModelState.IsValid || productDTO is null) return BadRequest("Bad Request!");
 
             try
             {
-                var product = new Product();
-                if (product.Find(productView.ID))
+                var product = UnityConfig.container.Resolve<Product>();
+                //var product = new Product(new GenericRepository<ProductTable>());
+                var productView = new ProductViewModel
                 {
+                    ID = productDTO.ID,
+                    Name = productDTO.Name,
+                    Quantity = productDTO.Quantity,
+                    Price = productDTO.Price
+                };
+            
+
+                if (product.Find(productDTO.ID))
+                {
+                    
+                       
                     product.Update(productView);
                     return Ok("Product updated.");
                 }
