@@ -9,12 +9,17 @@ namespace Market.Controller
 {
     public class ProductController : ApiController
     {
+        private readonly IProduct _productService = null;
+
+        public ProductController(IProduct productService)
+        {
+            _productService = productService;
+        }
+
         [HttpGet]
         public IHttpActionResult GetAllProducts()
         {
-            //return Ok(new Product(new GenericRepository<ProductTable>()).GetAll());
-            return Ok(UnityConfig.container.Resolve<Product>().GetAll());
-
+            return Ok(_productService.GetAll());
         }
 
         public IHttpActionResult PostAddProduct(ProductDTO productDTO)
@@ -23,28 +28,22 @@ namespace Market.Controller
 
             try
             {
-                var product = UnityConfig.container.Resolve<Product>();
-                //var product = new Product(new GenericRepository<ProductTable>());
                 var productView = new ProductViewModel
                 {
                     ID = productDTO.ID,
                     Name = productDTO.Name,
-                    Quantity = productDTO.Quantity,
                     Price = productDTO.Price
                 };
-            
 
-                if (product.Find(productDTO.ID))
+
+                if (_productService.Find(productDTO.ID))
                 {
-                    
-                       
-                    product.Update(productView);
-                    return Ok("Product updated.");
+                    return BadRequest("Product already exists.");
                 }
                 else
                 {
-                    product.Add(productView);
-                    return Ok("Product added.");
+                    _productService.Add(productView);
+                    return Ok("Product added successfully.");
                 }
             }
             catch (Exception e)

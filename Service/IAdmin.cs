@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Market.Service
 {
-    interface IAdmin
+    public interface IAdmin
     {
         bool Login(string UserID, string Password);
     }

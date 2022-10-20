@@ -23,7 +23,6 @@ namespace Market.Service
                 {
                     ID = p.ID.Trim(),
                     Name = p.Name,
-                    Quantity = p.Quantity,
                     Price = p.Price
                 }).ToList();
 
@@ -45,7 +44,6 @@ namespace Market.Service
                 ID = productView.ID,
                 Name = productView.Name,
                 Price = productView.Price,
-                Quantity = productView.Quantity
             };
             _genericProductRepository.Update(product);
             _genericProductRepository.Save();
@@ -64,7 +62,6 @@ namespace Market.Service
                     ID = productView.ID,
                     Name = productView.Name,
                     Price = productView.Price,
-                    Quantity = productView.Quantity
                 };
                 _genericProductRepository.Insert(product);
                 _genericProductRepository.Save();

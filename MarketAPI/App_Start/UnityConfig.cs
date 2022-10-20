@@ -2,15 +2,15 @@ using System.Web.Http;
 using Unity;
 using Unity.WebApi;
 using Market.Repository;
+using Market.Service;
 
 namespace Market
 {
     public static class UnityConfig
     {
-        public static UnityContainer container = new UnityContainer();
-
         public static void RegisterComponents()
         {
+            UnityContainer container = new UnityContainer();
 
             // register all your components with the container here
             // it is NOT necessary to register your controllers
@@ -19,7 +19,12 @@ namespace Market
             container.RegisterType<IGenericRepository<ProductTable>, GenericRepository<ProductTable>>();
             container.RegisterType<IGenericRepository<DistributionScheduleTable>, GenericRepository<DistributionScheduleTable>>();
             container.RegisterType<IGenericRepository<ShoppingCardTable>, GenericRepository<ShoppingCardTable>>();
-            // e.g. container.RegisterType<ITestService, TestService>();
+
+            container.RegisterType<IAdmin, Admin>();
+            container.RegisterType<ICustomer, Customer>();
+            container.RegisterType<IProduct, Product>();
+            container.RegisterType<IShoppingCard, ShoppingCard>();
+            container.RegisterType<IDistributionSchedule, DistributionSchedule>();
 
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }

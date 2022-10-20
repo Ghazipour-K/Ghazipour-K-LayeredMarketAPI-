@@ -5,13 +5,7 @@ using System.Web;
 
 namespace Market.Controller
 {
-    //public class LoginInfo
-    //{
-    //    public string ID { get; set; }
-    //    public string Pass { get; set; }
-
-    //}
-    public class AdminDTO
+    public class AdminLoginDTO
     {
         public string ID { get; set; }
         public string Pass { get; set; }

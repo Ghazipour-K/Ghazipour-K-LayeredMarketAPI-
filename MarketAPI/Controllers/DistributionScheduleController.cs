@@ -2,16 +2,19 @@
 using System.Web.Http;
 using Market.Model;
 using Market.Service;
-using Market.Repository;
-using Unity;
+
 namespace Market.Controller
 {
     public class DistributionScheduleController : ApiController
     {
+        private readonly IDistributionSchedule _distributionScheduleService = null;
+        public DistributionScheduleController(IDistributionSchedule distributionScheduleService)
+        {
+            _distributionScheduleService = distributionScheduleService;
+        }
         public IHttpActionResult GetAllSchedules()
         {
-            //return Ok(new DistributionSchedule(new GenericRepository<DistributionScheduleTable>()).GetAll());
-            return Ok(UnityConfig.container.Resolve<DistributionSchedule>().GetAll());
+            return Ok(_distributionScheduleService.GetAll());
         }
 
         public IHttpActionResult Post(DistributionScheduleDTO scheduleDTO)
@@ -20,8 +23,6 @@ namespace Market.Controller
 
             try
             {
-                var schedule = UnityConfig.container.Resolve<DistributionSchedule>();
-                //var schedule = new DistributionSchedule(new GenericRepository<DistributionScheduleTable>());
                 var scheduleView = new DistributionScheduleViewModel()
                 {
                     ID=scheduleDTO.ID,
@@ -30,7 +31,7 @@ namespace Market.Controller
                     EndingDeliveryHour=scheduleDTO.EndingDeliveryHour
                 };
 
-                schedule.Add(scheduleView);
+                _distributionScheduleService.Add(scheduleView);
                 return Ok("Item added to schedules!");
             }
             catch (Exception e)

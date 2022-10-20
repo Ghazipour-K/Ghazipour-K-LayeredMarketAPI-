@@ -8,19 +8,21 @@ namespace Market.Controller
 {
     public class ShoppingCardController : ApiController
     {
+        private readonly IShoppingCard _shoppingCardService = null;
+        public ShoppingCardController(IShoppingCard shoppingCardService)
+        {
+            _shoppingCardService = shoppingCardService;
+        }
         public IHttpActionResult GetAllShoppingCards()
         {
-            //return Ok(new ShoppingCard().GetAll());
-            return Ok(UnityConfig.container.Resolve<ShoppingCard>().GetAll());
+            return Ok(_shoppingCardService.GetAll());
         }
 
         public IHttpActionResult GetShoppingCardByCustomerID(string customerID)
         {
             if (!ModelState.IsValid || customerID is null) return BadRequest("Bad request!");
 
-            //return Ok(new ShoppingCard().GetShoppingCardByCustomerID(customerID));
-            return Ok(UnityConfig.container.Resolve<ShoppingCard>().GetShoppingCardByCustomerID(customerID));
-
+            return Ok(_shoppingCardService.GetShoppingCardByCustomerID(customerID));
         }
 
         public IHttpActionResult PostAddItemToShoppingCard(ShoppingCardDTO shoppingCardDTO)
@@ -29,8 +31,6 @@ namespace Market.Controller
 
             try
             {
-                var shoppingCard = UnityConfig.container.Resolve<ShoppingCard>();
-                //var shoppingCard = new ShoppingCard(new GenericRepository<ShoppingCardTable>());
                 var shoppingCardView = new ShoppingCardViewModel
                 {
                     CustomerID = shoppingCardDTO.CustomerID,
@@ -39,7 +39,7 @@ namespace Market.Controller
                     Quantity = shoppingCardDTO.Quantity,
                     PurchasedDate = shoppingCardDTO.PurchasedDate
                 };
-                shoppingCard.Add(shoppingCardView);
+                _shoppingCardService.Add(shoppingCardView);
                 return Ok("Item added to shopping card!");
             }
             catch (Exception e)
@@ -47,21 +47,18 @@ namespace Market.Controller
                 return BadRequest($"Error: {e.Message}");
             }
         }
-        
-        public IHttpActionResult DeleteItemFromShoppingCard(DeleteShoppingCardItemDTO shoppingCardDTO)
+
+        public IHttpActionResult DeleteItemFromShoppingCard(ShoppingCardItemDeleteDTO shoppingCardDTO)
         {
             if (!ModelState.IsValid || shoppingCardDTO is null) return BadRequest("Bad request!");
 
             try
             {
-                var shoppingCard = UnityConfig.container.Resolve<ShoppingCard>();
-                //var shoppingCard = new ShoppingCard(new GenericRepository<ShoppingCardTable>());
                 var shoppingCardView = new ShoppingCardViewModel
                 {
                     CustomerID = shoppingCardDTO.CustomerID,
-                    DeliveryScheduleID = shoppingCardDTO.DeliveryScheduleID,
                 };
-                shoppingCard.Remove(shoppingCardView);
+                _shoppingCardService.Remove(shoppingCardView);
                 return Ok("Item removed!");
             }
             catch (Exception e)
