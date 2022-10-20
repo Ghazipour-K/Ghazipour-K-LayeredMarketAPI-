@@ -2,8 +2,6 @@
 using System.Web.Http;
 using Market.Model;
 using Market.Service;
-using Market.Repository;
-using Unity;
 namespace Market.Controller
 {
     public class ShoppingCardController : ApiController

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Market.Controller
+﻿namespace Market.Controller
 {
     public class ShoppingCardItemDeleteDTO
     {

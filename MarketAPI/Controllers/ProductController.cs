@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Web.Http;
 using Market.Model;
-using Market.Repository;
 using Market.Service;
-using Unity;
 
 namespace Market.Controller
 {
