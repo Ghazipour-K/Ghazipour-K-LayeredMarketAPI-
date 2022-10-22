@@ -23,7 +23,7 @@ namespace Market.Controller
             return Ok(_shoppingCardService.GetShoppingCardByCustomerID(customerID));
         }
 
-        public IHttpActionResult PostAddItemToShoppingCard(ShoppingCardDTO shoppingCardDTO)
+        public IHttpActionResult PostAddItemToShoppingCard(AddNewItemToShoppingCardDTO shoppingCardDTO)
         {
             if (!ModelState.IsValid || shoppingCardDTO is null) return BadRequest("Bad request!");
 
@@ -46,7 +46,7 @@ namespace Market.Controller
             }
         }
 
-        public IHttpActionResult DeleteItemFromShoppingCard(ShoppingCardItemDeleteDTO shoppingCardDTO)
+        public IHttpActionResult DeleteItemFromShoppingCard(DeleteItemFromShoppingCardDTO shoppingCardDTO)
         {
             if (!ModelState.IsValid || shoppingCardDTO is null) return BadRequest("Bad request!");
 
@@ -55,6 +55,7 @@ namespace Market.Controller
                 var shoppingCardView = new ShoppingCardViewModel
                 {
                     CustomerID = shoppingCardDTO.CustomerID,
+                    ProductID = shoppingCardDTO.ProductID
                 };
                 _shoppingCardService.Remove(shoppingCardView);
                 return Ok("Item removed!");

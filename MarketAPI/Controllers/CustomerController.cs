@@ -10,11 +10,11 @@ namespace Market.Controller
         {
             _customerService = customerService;
         }
-        public IHttpActionResult PostLogin(CustomerLoginDTO customerDTO)
+        public IHttpActionResult PostLogin(CustomerLoginDTO loginDTO)
         {
-            if (ModelState.IsValid && !(customerDTO is null))
+            if (ModelState.IsValid && !(loginDTO is null))
             {
-                if (_customerService.Login(customerDTO.ID, customerDTO.Pass))
+                if (_customerService.Login(loginDTO.ID, loginDTO.Pass))
                     return Ok("Login Succecfull.");
                 else
                     return NotFound();

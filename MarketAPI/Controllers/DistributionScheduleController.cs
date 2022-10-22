@@ -17,7 +17,7 @@ namespace Market.Controller
             return Ok(_distributionScheduleService.GetAll());
         }
 
-        public IHttpActionResult Post(DistributionScheduleDTO scheduleDTO)
+        public IHttpActionResult Post(AddNewDistributionScheduleDTO scheduleDTO)
         {
             if (!ModelState.IsValid || scheduleDTO is null) return BadRequest("Bad request!"); //Must check DistributionScheduleViewModel for required items and integrity -- checking scheduleView is null is just a sample
 
@@ -25,10 +25,10 @@ namespace Market.Controller
             {
                 var scheduleView = new DistributionScheduleViewModel()
                 {
-                    ID=scheduleDTO.ID,
-                    DeliveryDate=scheduleDTO.DeliveryDate,
-                    StartingDeliveryHour=scheduleDTO.StartingDeliveryHour,
-                    EndingDeliveryHour=scheduleDTO.EndingDeliveryHour
+                    ID = scheduleDTO.ID,
+                    DeliveryDate = scheduleDTO.DeliveryDate,
+                    StartingDeliveryHour = scheduleDTO.StartingDeliveryHour,
+                    EndingDeliveryHour = scheduleDTO.EndingDeliveryHour
                 };
 
                 _distributionScheduleService.Add(scheduleView);

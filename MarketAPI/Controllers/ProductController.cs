@@ -20,7 +20,7 @@ namespace Market.Controller
             return Ok(_productService.GetAll());
         }
 
-        public IHttpActionResult PostAddProduct(ProductDTO productDTO)
+        public IHttpActionResult PostAddProduct(AddNewProductDTO productDTO)
         {
             if (!ModelState.IsValid || productDTO is null) return BadRequest("Bad Request!");
 

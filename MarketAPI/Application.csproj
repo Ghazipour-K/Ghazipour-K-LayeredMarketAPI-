@@ -114,10 +114,10 @@
     <Compile Include="Controllers\ShoppingCardController.cs" />
     <Compile Include="DTO\AdminLoginDTO.cs" />
     <Compile Include="DTO\CustomerLoginDTO.cs" />
-    <Compile Include="DTO\DistributionScheduleDTO.cs" />
-    <Compile Include="DTO\ProductDTO.cs" />
-    <Compile Include="DTO\ShoppingCardItemDeleteDTO.cs" />
-    <Compile Include="DTO\ShoppingCardDTO.cs" />
+    <Compile Include="DTO\AddNewDistributionScheduleDTO.cs" />
+    <Compile Include="DTO\AddNewProductDTO.cs" />
+    <Compile Include="DTO\DeleteItemFromShoppingCardDTO.cs" />
+    <Compile Include="DTO\AddNewItemToShoppingCardDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
