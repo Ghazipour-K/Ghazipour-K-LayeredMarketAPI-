@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Web.Http;
 using Market.Model;
 using Market.Service;
@@ -12,12 +13,12 @@ namespace Market.Controller
         {
             _distributionScheduleService = distributionScheduleService;
         }
-        public IHttpActionResult GetAllSchedules()
+        public async Task<IHttpActionResult> GetAllSchedulesAsync()
         {
-            return Ok(_distributionScheduleService.GetAll());
+            return Ok(await _distributionScheduleService.GetAllAsync());
         }
 
-        public IHttpActionResult Post(AddNewDistributionScheduleDTO scheduleDTO)
+        public async Task<IHttpActionResult> PostAddNewDistributionScheduleAsync(AddNewDistributionScheduleDTO scheduleDTO)
         {
             if (!ModelState.IsValid || scheduleDTO is null) return BadRequest("Bad request!"); //Must check DistributionScheduleViewModel for required items and integrity -- checking scheduleView is null is just a sample
 
@@ -31,7 +32,7 @@ namespace Market.Controller
                     EndingDeliveryHour = scheduleDTO.EndingDeliveryHour
                 };
 
-                _distributionScheduleService.Add(scheduleView);
+                await _distributionScheduleService.AddAsync(scheduleView);
                 return Ok("Item added to schedules!");
             }
             catch (Exception e)

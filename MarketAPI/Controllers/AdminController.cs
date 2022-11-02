@@ -1,7 +1,6 @@
-﻿using System.Web.Http;
-using Market.Model;
+﻿using System.Threading.Tasks;
+using System.Web.Http;
 using Market.Service;
-using Unity;
 
 namespace Market.Controller
 {
@@ -13,14 +12,18 @@ namespace Market.Controller
             _adminService = adminService;
         }
 
-        public IHttpActionResult PostLogin(AdminLoginDTO loginDTO)
+        public async Task<IHttpActionResult> PostLoginAsync(AdminLoginDTO loginDTO)
         {
             if (ModelState.IsValid && !(loginDTO is null))
             {
-                if (_adminService.Login(loginDTO.ID, loginDTO.Pass))
+                if (await _adminService.LoginAsync(loginDTO.ID, loginDTO.Pass))
+                {
                     return Ok("Login Succecfull.");
+                }
                 else
+                {
                     return NotFound();
+                }
             }
             else
                 return BadRequest("Bad Request.");

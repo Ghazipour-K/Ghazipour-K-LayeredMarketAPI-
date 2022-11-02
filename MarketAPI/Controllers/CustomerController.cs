@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Threading.Tasks;
+using System.Web.Http;
 using Market.Service;
 
 namespace Market.Controller
@@ -10,11 +11,12 @@ namespace Market.Controller
         {
             _customerService = customerService;
         }
-        public IHttpActionResult PostLogin(CustomerLoginDTO loginDTO)
+
+        public async Task<IHttpActionResult> PostLoginAsync(CustomerLoginDTO loginDTO)
         {
             if (ModelState.IsValid && !(loginDTO is null))
             {
-                if (_customerService.Login(loginDTO.ID, loginDTO.Pass))
+                if (await _customerService.LoginAsync(loginDTO.ID, loginDTO.Pass))
                     return Ok("Login Succecfull.");
                 else
                     return NotFound();

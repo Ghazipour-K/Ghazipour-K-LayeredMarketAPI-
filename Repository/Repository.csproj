@@ -96,8 +96,6 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Market.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.Config" />
     <None Include="Market.edmx.diagram">
       <DependentUpon>Market.edmx</DependentUpon>
@@ -105,19 +103,19 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Market.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Market.Context.cs</LastGenOutput>
       <DependentUpon>Market.edmx</DependentUpon>
+      <LastGenOutput>Market.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Market.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Market.edmx</DependentUpon>
       <LastGenOutput>Market.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

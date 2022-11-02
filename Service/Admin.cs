@@ -1,4 +1,5 @@
 ﻿using Market.Repository;
+using System.Threading.Tasks;
 
 namespace Market.Service
 {
@@ -20,6 +21,11 @@ namespace Market.Service
         public bool Login(string UserID, string Password)
         {
             return _adminRepository.Login(UserID, Password);
+        }
+
+        public async Task<bool> LoginAsync(string UserID, string Password)
+        {
+            return await _adminRepository.LoginAsync(UserID, Password);
         }
     }
 }

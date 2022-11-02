@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Market.Repository
 {
@@ -10,5 +11,10 @@ namespace Market.Repository
         void Update(T obj);
         void Delete(object id);
         void Save();
+
+        Task<IEnumerable<T>> GetAllAsync();
+        Task<T> GetByIdAsync(object id);
+        Task DeleteAsync(object id);
+        Task SaveAsync();
     }
 }

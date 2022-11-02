@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Market.Repository;
+using System.Threading.Tasks;
+
 namespace Market.Service
 {
     public class Product : IProduct
@@ -16,17 +18,45 @@ namespace Market.Service
 
         public List<ProductViewModel> GetAll()
         {
-            List<ProductViewModel> products;
+            try
+            {
+                List<ProductViewModel> products;
 
-            products = _genericProductRepository.GetAll()
-                .Select(p => new ProductViewModel
+                products = _genericProductRepository.GetAll()
+                    .Select(p => new ProductViewModel
+                    {
+                        ID = p.ID.Trim(),
+                        Name = p.Name,
+                        Price = p.Price
+                    }).ToList();
+
+                return products;
+            }
+            catch
+            {
+                throw new Exception("Error on fetching data!");
+            }
+        }
+
+        public async Task<List<ProductViewModel>> GetAllAsync()
+        {
+            try
+            {
+                var products = await _genericProductRepository.GetAllAsync();
+
+                var productList = products.Select(p => new ProductViewModel
                 {
                     ID = p.ID.Trim(),
                     Name = p.Name,
                     Price = p.Price
                 }).ToList();
 
-            return products;
+                return productList;
+            }
+            catch 
+            {
+                throw new Exception("Error on fetching data!");
+            }
         }
 
         public bool Find(string productId)
@@ -37,16 +67,49 @@ namespace Market.Service
 
         }
 
+        public async Task<bool> FindAsync(string poductId)
+        {
+            var result = await _genericProductRepository.GetByIdAsync(poductId) == null ? false : true;
+
+            return result;
+        }
+
         public void Update(ProductViewModel productView)
         {
-            var product = new ProductTable
+            try
             {
-                ID = productView.ID,
-                Name = productView.Name,
-                Price = productView.Price,
-            };
-            _genericProductRepository.Update(product);
-            _genericProductRepository.Save();
+                var product = new ProductTable
+                {
+                    ID = productView.ID,
+                    Name = productView.Name,
+                    Price = productView.Price,
+                };
+                _genericProductRepository.Update(product);
+                _genericProductRepository.Save();
+            }
+            catch
+            {
+                throw new Exception("Error on update!");
+            }
+        }
+
+        public async Task UpdateAsync(ProductViewModel productView)
+        {
+            try
+            {
+                var product = new ProductTable
+                {
+                    ID = productView.ID,
+                    Name = productView.Name,
+                    Price = productView.Price,
+                };
+                _genericProductRepository.Update(product);
+                await _genericProductRepository.SaveAsync();
+            }
+            catch
+            {
+                throw new Exception("Error on update!");
+            }
         }
 
         public void Add(ProductViewModel productView)
@@ -67,5 +130,27 @@ namespace Market.Service
                 _genericProductRepository.Save();
             }
         }
+
+
+        public async Task AddAsync(ProductViewModel productView)
+        {
+            if (await FindAsync(productView.ID))
+            {
+                throw new Exception("Product already exists!");
+            }
+            else
+            {
+                var product = new ProductTable
+                {
+                    ID = productView.ID,
+                    Name = productView.Name,
+                    Price = productView.Price,
+                };
+                _genericProductRepository.Insert(product);
+                await _genericProductRepository.SaveAsync();
+            }
+        }
+
+        
     }
 }

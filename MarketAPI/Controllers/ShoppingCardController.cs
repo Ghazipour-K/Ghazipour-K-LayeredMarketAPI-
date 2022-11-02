@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Web.Http;
 using Market.Model;
 using Market.Service;
@@ -11,19 +12,19 @@ namespace Market.Controller
         {
             _shoppingCardService = shoppingCardService;
         }
-        public IHttpActionResult GetAllShoppingCards()
+        public async Task<IHttpActionResult> GetAllShoppingCardsAsycn()
         {
-            return Ok(_shoppingCardService.GetAll());
+            return Ok(await _shoppingCardService.GetAllAsync());
         }
 
-        public IHttpActionResult GetShoppingCardByCustomerID(string customerID)
+        public async Task<IHttpActionResult> GetShoppingCardByCustomerIDAsync(string customerID)
         {
             if (!ModelState.IsValid || customerID is null) return BadRequest("Bad request!");
 
-            return Ok(_shoppingCardService.GetShoppingCardByCustomerID(customerID));
+            return Ok(await _shoppingCardService.GetShoppingCardByCustomerIDAsync(customerID));
         }
 
-        public IHttpActionResult PostAddItemToShoppingCard(AddNewItemToShoppingCardDTO shoppingCardDTO)
+        public async Task<IHttpActionResult> PostAddItemToShoppingCardAsync(AddNewItemToShoppingCardDTO shoppingCardDTO)
         {
             if (!ModelState.IsValid || shoppingCardDTO is null) return BadRequest("Bad request!");
 
@@ -37,7 +38,7 @@ namespace Market.Controller
                     Quantity = shoppingCardDTO.Quantity,
                     PurchasedDate = shoppingCardDTO.PurchasedDate
                 };
-                _shoppingCardService.Add(shoppingCardView);
+                await _shoppingCardService.AddAsync(shoppingCardView);
                 return Ok("Item added to shopping card!");
             }
             catch (Exception e)
@@ -46,7 +47,7 @@ namespace Market.Controller
             }
         }
 
-        public IHttpActionResult DeleteItemFromShoppingCard(DeleteItemFromShoppingCardDTO shoppingCardDTO)
+        public async Task<IHttpActionResult> DeleteItemFromShoppingCardAsync(DeleteItemFromShoppingCardDTO shoppingCardDTO)
         {
             if (!ModelState.IsValid || shoppingCardDTO is null) return BadRequest("Bad request!");
 
@@ -57,7 +58,7 @@ namespace Market.Controller
                     CustomerID = shoppingCardDTO.CustomerID,
                     ProductID = shoppingCardDTO.ProductID
                 };
-                _shoppingCardService.Remove(shoppingCardView);
+                await _shoppingCardService.RemoveAsync(shoppingCardView);
                 return Ok("Item removed!");
             }
             catch (Exception e)

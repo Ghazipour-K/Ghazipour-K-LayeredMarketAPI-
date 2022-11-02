@@ -1,5 +1,6 @@
 ﻿using Market.Model;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Market.Service
 {
@@ -11,6 +12,13 @@ namespace Market.Service
         void Update(ShoppingCardViewModel shoppingCardView);
         void Add(ShoppingCardViewModel shoppingCardView);
         void Remove(ShoppingCardViewModel shoppingCardView);
+
+        Task<List<ShoppingCardViewModel>> GetAllAsync();
+        Task<bool> FindAsync(ShoppingCardViewModel shoppingCardView);
+        Task<List<ShoppingCardViewModel>> GetShoppingCardByCustomerIDAsync(string customerID);
+        Task UpdateAsync(ShoppingCardViewModel shoppingCardView);
+        Task AddAsync(ShoppingCardViewModel shoppingCardView);
+        Task RemoveAsync(ShoppingCardViewModel shoppingCardView);
 
     }
 }

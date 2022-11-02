@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Web.Http;
 using Market.Model;
 using Market.Service;
@@ -15,12 +16,12 @@ namespace Market.Controller
         }
 
         [HttpGet]
-        public IHttpActionResult GetAllProducts()
+        public async Task<IHttpActionResult> GetAllProductsAsync()
         {
-            return Ok(_productService.GetAll());
+            return Ok(await _productService.GetAllAsync());
         }
 
-        public IHttpActionResult PostAddProduct(AddNewProductDTO productDTO)
+        public async Task<IHttpActionResult> PostAddProductAsync(AddNewProductDTO productDTO)
         {
             if (!ModelState.IsValid || productDTO is null) return BadRequest("Bad Request!");
 
@@ -34,13 +35,13 @@ namespace Market.Controller
                 };
 
 
-                if (_productService.Find(productDTO.ID))
+                if (await _productService.FindAsync(productDTO.ID))
                 {
                     return BadRequest("Product already exists.");
                 }
                 else
                 {
-                    _productService.Add(productView);
+                    await _productService.AddAsync(productView);
                     return Ok("Product added successfully.");
                 }
             }
