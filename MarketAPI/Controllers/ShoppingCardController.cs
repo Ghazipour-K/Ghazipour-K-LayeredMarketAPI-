@@ -5,6 +5,7 @@ using Market.Model;
 using Market.Service;
 namespace Market.Controller
 {
+    [RoutePrefix("api/ShoppingCard")]
     public class ShoppingCardController : ApiController
     {
         private readonly IShoppingCard _shoppingCardService = null;
@@ -12,11 +13,16 @@ namespace Market.Controller
         {
             _shoppingCardService = shoppingCardService;
         }
+
+        [Route("")]
+        [HttpGet]
         public async Task<IHttpActionResult> GetAllShoppingCardsAsycn()
         {
             return Ok(await _shoppingCardService.GetAllAsync());
         }
 
+        [Route("{customerID}")]
+        [HttpGet]
         public async Task<IHttpActionResult> GetShoppingCardByCustomerIDAsync(string customerID)
         {
             if (!ModelState.IsValid || customerID is null) return BadRequest("Bad request!");
@@ -24,6 +30,8 @@ namespace Market.Controller
             return Ok(await _shoppingCardService.GetShoppingCardByCustomerIDAsync(customerID));
         }
 
+        [Route("")]
+        [HttpPost]
         public async Task<IHttpActionResult> PostAddItemToShoppingCardAsync(AddNewItemToShoppingCardDTO shoppingCardDTO)
         {
             if (!ModelState.IsValid || shoppingCardDTO is null) return BadRequest("Bad request!");
@@ -47,6 +55,8 @@ namespace Market.Controller
             }
         }
 
+        [Route("")]
+        [HttpDelete]
         public async Task<IHttpActionResult> DeleteItemFromShoppingCardAsync(DeleteItemFromShoppingCardDTO shoppingCardDTO)
         {
             if (!ModelState.IsValid || shoppingCardDTO is null) return BadRequest("Bad request!");

@@ -5,6 +5,7 @@ using System.Linq;
 using Market.Repository;
 using System.Threading.Tasks;
 
+
 namespace Market.Service
 {
     public class Product : IProduct
@@ -53,7 +54,7 @@ namespace Market.Service
 
                 return productList;
             }
-            catch 
+            catch
             {
                 throw new Exception("Error on fetching data!");
             }
@@ -151,6 +152,30 @@ namespace Market.Service
             }
         }
 
-        
+        public async Task<ProductViewModel> GetByIDAsync(string productId)
+        {
+            try
+            {
+                var p = await _genericProductRepository.GetByIdAsync(productId);
+                if (p != null)
+                {
+                    ProductViewModel product = new ProductViewModel
+                    {
+                        ID = p.ID,
+                        Name = p.Name,
+                        Price = p.Price,
+                    };
+
+                    return product;
+                }
+                else
+                    //throw new KeyNotFoundException("Item not found!");
+                    return null;
+            }
+            catch
+            {
+                throw new Exception("Error on fetching data!");
+            }
+        }
     }
 }

@@ -4,6 +4,7 @@ using Market.Service;
 
 namespace Market.Controller
 {
+    [RoutePrefix("api/Customer")]
     public class CustomerController : ApiController
     {
         private readonly ICustomer _customerService = null;
@@ -12,6 +13,8 @@ namespace Market.Controller
             _customerService = customerService;
         }
 
+        [Route("")]
+        [HttpPost]
         public async Task<IHttpActionResult> PostLoginAsync(CustomerLoginDTO loginDTO)
         {
             if (ModelState.IsValid && !(loginDTO is null))

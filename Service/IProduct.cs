@@ -15,5 +15,6 @@ namespace Market.Service
         Task<List<ProductViewModel>> GetAllAsync();
         Task UpdateAsync(ProductViewModel productView);
         Task AddAsync(ProductViewModel productView);
+        Task<ProductViewModel> GetByIDAsync(string PoductId);
     }
 }

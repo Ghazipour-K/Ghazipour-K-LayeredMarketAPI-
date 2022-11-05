@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Results;
 using Market.Model;
 using Market.Service;
 
 namespace Market.Controller
 {
+    [RoutePrefix("api/Products")]
     public class ProductController : ApiController
     {
         private readonly IProduct _productService = null;
@@ -15,12 +18,29 @@ namespace Market.Controller
             _productService = productService;
         }
 
+        [Route("{productID}")]
+        [HttpGet]
+        public async Task<IHttpActionResult> GetProductByIDAsync(string productID)
+        {
+            try
+            {
+                return Ok(await _productService.GetByIDAsync(productID));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Route("")]
         [HttpGet]
         public async Task<IHttpActionResult> GetAllProductsAsync()
         {
             return Ok(await _productService.GetAllAsync());
         }
 
+        [Route("")]
+        [HttpPost]
         public async Task<IHttpActionResult> PostAddProductAsync(AddNewProductDTO productDTO)
         {
             if (!ModelState.IsValid || productDTO is null) return BadRequest("Bad Request!");
@@ -45,9 +65,9 @@ namespace Market.Controller
                     return Ok("Product added successfully.");
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return BadRequest($"Error: {e.Message}");
+                return BadRequest($"Error: {ex.Message}");
             }
         }
     }

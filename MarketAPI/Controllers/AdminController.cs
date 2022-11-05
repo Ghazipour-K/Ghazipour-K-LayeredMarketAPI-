@@ -4,6 +4,7 @@ using Market.Service;
 
 namespace Market.Controller
 {
+    [RoutePrefix("api/Admin")]
     public class AdminController : ApiController
     {
         private readonly IAdmin _adminService = null;
@@ -12,6 +13,8 @@ namespace Market.Controller
             _adminService = adminService;
         }
 
+        [Route("")]
+        [HttpPost]
         public async Task<IHttpActionResult> PostLoginAsync(AdminLoginDTO loginDTO)
         {
             if (ModelState.IsValid && !(loginDTO is null))

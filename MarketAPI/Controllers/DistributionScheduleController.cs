@@ -6,6 +6,7 @@ using Market.Service;
 
 namespace Market.Controller
 {
+    [RoutePrefix("api/DistributionSchedule")]
     public class DistributionScheduleController : ApiController
     {
         private readonly IDistributionSchedule _distributionScheduleService = null;
@@ -13,11 +14,16 @@ namespace Market.Controller
         {
             _distributionScheduleService = distributionScheduleService;
         }
+
+        [Route("")]
+        [HttpGet]
         public async Task<IHttpActionResult> GetAllSchedulesAsync()
         {
             return Ok(await _distributionScheduleService.GetAllAsync());
         }
 
+        [Route("")]
+        [HttpPost]
         public async Task<IHttpActionResult> PostAddNewDistributionScheduleAsync(AddNewDistributionScheduleDTO scheduleDTO)
         {
             if (!ModelState.IsValid || scheduleDTO is null) return BadRequest("Bad request!"); //Must check DistributionScheduleViewModel for required items and integrity -- checking scheduleView is null is just a sample
