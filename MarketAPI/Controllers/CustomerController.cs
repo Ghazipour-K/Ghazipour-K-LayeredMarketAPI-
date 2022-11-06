@@ -4,7 +4,7 @@ using Market.Service;
 
 namespace Market.Controller
 {
-    [RoutePrefix("api/Customer")]
+    [RoutePrefix("api/customer")]
     public class CustomerController : ApiController
     {
         private readonly ICustomer _customerService = null;

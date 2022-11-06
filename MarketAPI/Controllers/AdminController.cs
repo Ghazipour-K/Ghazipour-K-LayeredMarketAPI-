@@ -4,7 +4,7 @@ using Market.Service;
 
 namespace Market.Controller
 {
-    [RoutePrefix("api/Admin")]
+    [RoutePrefix("api/admin")]
     public class AdminController : ApiController
     {
         private readonly IAdmin _adminService = null;

@@ -8,7 +8,7 @@ using Market.Service;
 
 namespace Market.Controller
 {
-    [RoutePrefix("api/Products")]
+    [RoutePrefix("api/products")]
     public class ProductController : ApiController
     {
         private readonly IProduct _productService = null;
@@ -18,13 +18,13 @@ namespace Market.Controller
             _productService = productService;
         }
 
-        [Route("{productID}")]
+        [Route("{productId}")]
         [HttpGet]
-        public async Task<IHttpActionResult> GetProductByIDAsync(string productID)
+        public async Task<IHttpActionResult> GetProductByIDAsync(string productId)
         {
             try
             {
-                return Ok(await _productService.GetByIDAsync(productID));
+                return Ok(await _productService.GetByIDAsync(productId));
             }
             catch (Exception ex)
             {

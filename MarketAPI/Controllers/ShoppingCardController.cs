@@ -14,14 +14,14 @@ namespace Market.Controller
             _shoppingCardService = shoppingCardService;
         }
 
-        [Route("api/ShoppingCard")]
+        [Route("api/shopping-card")]
         [HttpGet]
         public async Task<IHttpActionResult> GetAllShoppingCardsAsycn()
         {
             return Ok(await _shoppingCardService.GetAllAsync());
         }
 
-        [Route("api/Customer/{customerID}/ShoppingCard")]
+        [Route("api/customer/{customerID}/shopping-card")]
         [HttpGet]
         public async Task<IHttpActionResult> GetShoppingCardByCustomerIDAsync(string customerID)
         {
@@ -30,7 +30,7 @@ namespace Market.Controller
             return Ok(await _shoppingCardService.GetShoppingCardByCustomerIDAsync(customerID));
         }
 
-        [Route("api/ShoppingCard")]
+        [Route("api/shopping-card")]
         [HttpPost]
         public async Task<IHttpActionResult> PostAddItemToShoppingCardAsync(AddItemToShoppingCardCommand shoppingCardCommand)
         {
@@ -55,7 +55,7 @@ namespace Market.Controller
             }
         }
 
-        [Route("api/ShoppingCard")]
+        [Route("api/shopping-card")]
         [HttpDelete]
         public async Task<IHttpActionResult> DeleteItemFromShoppingCardAsync(DeleteItemFromShoppingCardCommand shoppingCardCommand)
         {

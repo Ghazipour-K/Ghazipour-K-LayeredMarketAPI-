@@ -6,7 +6,7 @@ using Market.Service;
 
 namespace Market.Controller
 {
-    [RoutePrefix("api/DistributionSchedule")]
+    [RoutePrefix("api/distribution-schedule")]
     public class DistributionScheduleController : ApiController
     {
         private readonly IDistributionSchedule _distributionScheduleService = null;
