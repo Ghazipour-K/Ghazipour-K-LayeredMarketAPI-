@@ -41,7 +41,7 @@ namespace Market.Controller
 
         [Route("")]
         [HttpPost]
-        public async Task<IHttpActionResult> PostAddProductAsync(AddNewProductDTO productDTO)
+        public async Task<IHttpActionResult> PostAddProductAsync(CreateProductCommand productDTO)
         {
             if (!ModelState.IsValid || productDTO is null) return BadRequest("Bad Request!");
 

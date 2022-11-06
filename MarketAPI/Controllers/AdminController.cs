@@ -15,7 +15,7 @@ namespace Market.Controller
 
         [Route("")]
         [HttpPost]
-        public async Task<IHttpActionResult> PostLoginAsync(AdminLoginDTO loginDTO)
+        public async Task<IHttpActionResult> PostLoginAsync(AdminLoginCommand loginDTO)
         {
             if (ModelState.IsValid && !(loginDTO is null))
             {

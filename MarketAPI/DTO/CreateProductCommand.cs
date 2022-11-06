@@ -1,6 +1,6 @@
 ﻿namespace Market.Controller
 {
-    public class AddNewProductDTO
+    public class CreateProductCommand
     {
         public string ID { get; set; }
         public string Name { get; set; }

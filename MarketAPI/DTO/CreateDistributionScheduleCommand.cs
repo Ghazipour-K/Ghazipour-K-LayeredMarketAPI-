@@ -2,7 +2,7 @@
 
 namespace Market.Controller
 {
-    public class AddNewDistributionScheduleDTO
+    public class CreateDistributionScheduleCommand
     {
         public string ID { get; set; }
         public DateTime DeliveryDate { get; set; }

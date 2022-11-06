@@ -32,7 +32,7 @@ namespace Market.Controller
 
         [Route("")]
         [HttpPost]
-        public async Task<IHttpActionResult> PostAddItemToShoppingCardAsync(AddNewItemToShoppingCardDTO shoppingCardDTO)
+        public async Task<IHttpActionResult> PostAddItemToShoppingCardAsync(AddItemToShoppingCardCommand shoppingCardDTO)
         {
             if (!ModelState.IsValid || shoppingCardDTO is null) return BadRequest("Bad request!");
 
@@ -57,7 +57,7 @@ namespace Market.Controller
 
         [Route("")]
         [HttpDelete]
-        public async Task<IHttpActionResult> DeleteItemFromShoppingCardAsync(DeleteItemFromShoppingCardDTO shoppingCardDTO)
+        public async Task<IHttpActionResult> DeleteItemFromShoppingCardAsync(DeleteItemFromShoppingCardCommand shoppingCardDTO)
         {
             if (!ModelState.IsValid || shoppingCardDTO is null) return BadRequest("Bad request!");
 

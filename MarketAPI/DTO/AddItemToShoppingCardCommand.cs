@@ -2,7 +2,7 @@
 
 namespace Market.Controller
 {
-    public class AddNewItemToShoppingCardDTO
+    public class AddItemToShoppingCardCommand
     {
         public string CustomerID { get; set; }
         public string ProductID { get; set; }

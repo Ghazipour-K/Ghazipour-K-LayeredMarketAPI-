@@ -24,7 +24,7 @@ namespace Market.Controller
 
         [Route("")]
         [HttpPost]
-        public async Task<IHttpActionResult> PostAddNewDistributionScheduleAsync(AddNewDistributionScheduleDTO scheduleDTO)
+        public async Task<IHttpActionResult> PostAddNewDistributionScheduleAsync(CreateDistributionScheduleCommand scheduleDTO)
         {
             if (!ModelState.IsValid || scheduleDTO is null) return BadRequest("Bad request!"); //Must check DistributionScheduleViewModel for required items and integrity -- checking scheduleView is null is just a sample
 
