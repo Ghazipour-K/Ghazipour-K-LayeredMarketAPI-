@@ -15,11 +15,11 @@ namespace Market.Controller
 
         [Route("")]
         [HttpPost]
-        public async Task<IHttpActionResult> PostLoginAsync(CustomerLoginCommand loginDTO)
+        public async Task<IHttpActionResult> PostLoginAsync(CustomerLoginCommand loginCommand)
         {
-            if (ModelState.IsValid && !(loginDTO is null))
+            if (ModelState.IsValid && !(loginCommand is null))
             {
-                if (await _customerService.LoginAsync(loginDTO.ID, loginDTO.Pass))
+                if (await _customerService.LoginAsync(loginCommand.ID, loginCommand.Pass))
                     return Ok("Login Succecfull.");
                 else
                     return NotFound();

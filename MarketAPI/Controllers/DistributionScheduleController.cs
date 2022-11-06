@@ -24,18 +24,18 @@ namespace Market.Controller
 
         [Route("")]
         [HttpPost]
-        public async Task<IHttpActionResult> PostAddNewDistributionScheduleAsync(CreateDistributionScheduleCommand scheduleDTO)
+        public async Task<IHttpActionResult> PostAddNewDistributionScheduleAsync(CreateDistributionScheduleCommand scheduleCommand)
         {
-            if (!ModelState.IsValid || scheduleDTO is null) return BadRequest("Bad request!"); //Must check DistributionScheduleViewModel for required items and integrity -- checking scheduleView is null is just a sample
+            if (!ModelState.IsValid || scheduleCommand is null) return BadRequest("Bad request!"); //Must check DistributionScheduleViewModel for required items and integrity -- checking scheduleView is null is just a sample
 
             try
             {
                 var scheduleView = new DistributionScheduleViewModel()
                 {
-                    ID = scheduleDTO.ID,
-                    DeliveryDate = scheduleDTO.DeliveryDate,
-                    StartingDeliveryHour = scheduleDTO.StartingDeliveryHour,
-                    EndingDeliveryHour = scheduleDTO.EndingDeliveryHour
+                    ID = scheduleCommand.ID,
+                    DeliveryDate = scheduleCommand.DeliveryDate,
+                    StartingDeliveryHour = scheduleCommand.StartingDeliveryHour,
+                    EndingDeliveryHour = scheduleCommand.EndingDeliveryHour
                 };
 
                 await _distributionScheduleService.AddAsync(scheduleView);

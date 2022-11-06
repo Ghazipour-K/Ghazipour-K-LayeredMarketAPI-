@@ -48,7 +48,7 @@ namespace Market.Service
             List<ShoppingCardViewModel> customerShoppingCard;
 
             customerShoppingCard = _genericShoppingCardRepository.GetAll()
-                .Where(s => s.CID == customerID)
+                .Where(s => s.CID.Trim() == customerID.Trim())
                 .Select(s => new ShoppingCardViewModel
                 {
                     CustomerID = s.CID.Trim(),
@@ -149,7 +149,7 @@ namespace Market.Service
             List<ShoppingCardViewModel> customerShoppingCard;
 
             customerShoppingCard = (await _genericShoppingCardRepository.GetAllAsync())
-                .Where(s => s.CID == customerID)
+                .Where(s => s.CID.Trim() == customerID.Trim())
                 .Select(s => new ShoppingCardViewModel
                 {
                     CustomerID = s.CID.Trim(),

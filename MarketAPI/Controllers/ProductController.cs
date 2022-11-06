@@ -41,21 +41,21 @@ namespace Market.Controller
 
         [Route("")]
         [HttpPost]
-        public async Task<IHttpActionResult> PostAddProductAsync(CreateProductCommand productDTO)
+        public async Task<IHttpActionResult> PostCreateProductAsync(CreateProductCommand productCommand)
         {
-            if (!ModelState.IsValid || productDTO is null) return BadRequest("Bad Request!");
+            if (!ModelState.IsValid || productCommand is null) return BadRequest("Bad Request!");
 
             try
             {
                 var productView = new ProductViewModel
                 {
-                    ID = productDTO.ID,
-                    Name = productDTO.Name,
-                    Price = productDTO.Price
+                    ID = productCommand.ID,
+                    Name = productCommand.Name,
+                    Price = productCommand.Price
                 };
 
 
-                if (await _productService.FindAsync(productDTO.ID))
+                if (await _productService.FindAsync(productCommand.ID))
                 {
                     return BadRequest("Product already exists.");
                 }
