@@ -26,9 +26,9 @@ namespace Market.Service
                 products = _genericProductRepository.GetAll()
                     .Select(p => new ProductViewModel
                     {
-                        ID = p.ID.Trim(),
-                        Name = p.Name,
-                        Price = p.Price
+                        ProductID = p.ID,
+                        ProductName = p.Name,
+                        ProductPrice = p.Price
                     }).ToList();
 
                 return products;
@@ -47,9 +47,9 @@ namespace Market.Service
 
                 var productList = products.Select(p => new ProductViewModel
                 {
-                    ID = p.ID.Trim(),
-                    Name = p.Name,
-                    Price = p.Price
+                    ProductID = p.ID,
+                    ProductName = p.Name,
+                    ProductPrice = p.Price
                 }).ToList();
 
                 return productList;
@@ -60,7 +60,7 @@ namespace Market.Service
             }
         }
 
-        public bool Find(string productId)
+        public bool Find(int productId)
         {
             var result = _genericProductRepository.GetById(productId) == null ? false : true;
 
@@ -68,22 +68,21 @@ namespace Market.Service
 
         }
 
-        public async Task<bool> FindAsync(string poductId)
+        public async Task<bool> FindAsync(int poductId)
         {
             var result = await _genericProductRepository.GetByIdAsync(poductId) == null ? false : true;
 
             return result;
         }
 
-        public void Update(ProductViewModel productView)
+        public void Update(CreateProductViewModel productView)
         {
             try
             {
                 var product = new ProductTable
                 {
-                    ID = productView.ID,
-                    Name = productView.Name,
-                    Price = productView.Price,
+                    Name = productView.ProductName,
+                    Price = productView.ProductPrice,
                 };
                 _genericProductRepository.Update(product);
                 _genericProductRepository.Save();
@@ -94,15 +93,14 @@ namespace Market.Service
             }
         }
 
-        public async Task UpdateAsync(ProductViewModel productView)
+        public async Task UpdateAsync(CreateProductViewModel productView)
         {
             try
             {
                 var product = new ProductTable
                 {
-                    ID = productView.ID,
-                    Name = productView.Name,
-                    Price = productView.Price,
+                    Name = productView.ProductName,
+                    Price = productView.ProductPrice,
                 };
                 _genericProductRepository.Update(product);
                 await _genericProductRepository.SaveAsync();
@@ -113,43 +111,29 @@ namespace Market.Service
             }
         }
 
-        public void Add(ProductViewModel productView)
+        public void Add(CreateProductViewModel productView)
         {
-            if (Find(productView.ID))
+
+            var product = new ProductTable
             {
-                throw new Exception("Product already exists!");
-            }
-            else
-            {
-                var product = new ProductTable
-                {
-                    ID = productView.ID,
-                    Name = productView.Name,
-                    Price = productView.Price,
-                };
-                _genericProductRepository.Insert(product);
-                _genericProductRepository.Save();
-            }
+                Name = productView.ProductName,
+                Price = productView.ProductPrice,
+            };
+            _genericProductRepository.Insert(product);
+            _genericProductRepository.Save();
         }
 
 
-        public async Task AddAsync(ProductViewModel productView)
+        public async Task AddAsync(CreateProductViewModel productView)
         {
-            if (await FindAsync(productView.ID))
+
+            var product = new ProductTable
             {
-                throw new Exception("Product already exists!");
-            }
-            else
-            {
-                var product = new ProductTable
-                {
-                    ID = productView.ID,
-                    Name = productView.Name,
-                    Price = productView.Price,
-                };
-                _genericProductRepository.Insert(product);
-                await _genericProductRepository.SaveAsync();
-            }
+                Name = productView.ProductName,
+                Price = productView.ProductPrice,
+            };
+            _genericProductRepository.Insert(product);
+            await _genericProductRepository.SaveAsync();
         }
 
         public async Task<ProductViewModel> GetByIDAsync(string productId)
@@ -161,9 +145,9 @@ namespace Market.Service
                 {
                     ProductViewModel product = new ProductViewModel
                     {
-                        ID = p.ID,
-                        Name = p.Name,
-                        Price = p.Price,
+                        ProductID = p.ID,
+                        ProductName = p.Name,
+                        ProductPrice = p.Price,
                     };
 
                     return product;

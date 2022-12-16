@@ -14,14 +14,14 @@ namespace Market.Repository
     
     public partial class ShoppingCardTable
     {
-        public string CID { get; set; }
-        public string PID { get; set; }
-        public string SID { get; set; }
+        public int UID { get; set; }
+        public int PID { get; set; }
+        public int SID { get; set; }
         public int Quantity { get; set; }
         public System.DateTime PurchasedDate { get; set; }
     
-        public virtual CustomerTable CustomerTable { get; set; }
         public virtual DistributionScheduleTable DistributionScheduleTable { get; set; }
         public virtual ProductTable ProductTable { get; set; }
+        public virtual UserTable UserTable { get; set; }
     }
 }

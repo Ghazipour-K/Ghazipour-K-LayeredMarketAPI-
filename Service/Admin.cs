@@ -5,10 +5,10 @@ namespace Market.Service
 {
     public class Admin : IAdmin
     {
-        private readonly IGenericRepository<AdminTable>  _genericAdminRepository = null;
+        private readonly IGenericRepository<UserTable>  _genericAdminRepository = null;
         private readonly IAdminRepository _adminRepository = null;
         
-        public Admin(IGenericRepository<AdminTable> repository)
+        public Admin(IGenericRepository<UserTable> repository)
         {
             _genericAdminRepository = repository;
         }
@@ -18,14 +18,14 @@ namespace Market.Service
             _adminRepository = repository;
         }
 
-        public bool Login(string UserID, string Password)
+        public UserTable Login(string UserName, string Password)
         {
-            return _adminRepository.Login(UserID, Password);
+            return _adminRepository.Login(UserName, Password);
         }
 
-        public async Task<bool> LoginAsync(string UserID, string Password)
+        public async Task<UserTable> LoginAsync(string UserName, string Password)
         {
-            return await _adminRepository.LoginAsync(UserID, Password);
+            return await _adminRepository.LoginAsync(UserName, Password);
         }
     }
 }

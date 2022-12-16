@@ -23,9 +23,9 @@ namespace Market.Service
             shoppingCards = _genericShoppingCardRepository.GetAll()
                 .Select(c => new ShoppingCardViewModel
                 {
-                    CustomerID = c.CID.Trim(),
-                    ProductID = c.PID.Trim(),
-                    DeliveryScheduleID = c.SID.Trim(),
+                    UserID = c.UID,
+                    ProductID = c.PID,
+                    DeliveryScheduleID = c.SID,
                     Quantity = c.Quantity,
                     PurchasedDate = c.PurchasedDate
                 }).ToList();
@@ -38,22 +38,22 @@ namespace Market.Service
             return _genericShoppingCardRepository.GetAll()
                 .Where
                 (
-                p => p.CID == shoppingCardView.CustomerID &&
+                p => p.UID == shoppingCardView.UserID &&
                 p.PID == shoppingCardView.ProductID
                 ).Count() != 0;
         }
 
-        public List<ShoppingCardViewModel> GetShoppingCardByCustomerID(string customerID)
+        public List<ShoppingCardViewModel> GetShoppingCardByCustomerID(int customerID)
         {
             List<ShoppingCardViewModel> customerShoppingCard;
 
             customerShoppingCard = _genericShoppingCardRepository.GetAll()
-                .Where(s => s.CID.Trim() == customerID.Trim())
+                .Where(s => s.UID == customerID)
                 .Select(s => new ShoppingCardViewModel
                 {
-                    CustomerID = s.CID.Trim(),
-                    ProductID = s.PID.Trim(),
-                    DeliveryScheduleID = s.SID.Trim(),
+                    UserID = s.UID,
+                    ProductID = s.PID,
+                    DeliveryScheduleID = s.SID,
                     Quantity = s.Quantity,
                     PurchasedDate = s.PurchasedDate
                 }).ToList();
@@ -62,7 +62,7 @@ namespace Market.Service
         }
         public void Update(ShoppingCardViewModel shoppingCardView)
         {
-            var shoppingCard = _genericShoppingCardRepository.GetAll().Where(p => p.CID == shoppingCardView.CustomerID && p.PID == shoppingCardView.ProductID).FirstOrDefault();
+            var shoppingCard = _genericShoppingCardRepository.GetAll().Where(p => p.UID == shoppingCardView.UserID && p.PID == shoppingCardView.ProductID).FirstOrDefault();
 
             if (shoppingCard is null)
             {
@@ -87,7 +87,7 @@ namespace Market.Service
             {
                 var shoppingCard = new ShoppingCardTable
                 {
-                    CID = shoppingCardView.CustomerID,
+                    UID = shoppingCardView.UserID,
                     PID = shoppingCardView.ProductID,
                     SID = shoppingCardView.DeliveryScheduleID,
                     PurchasedDate = DateTime.Now,
@@ -102,7 +102,7 @@ namespace Market.Service
         {
             var item = _genericShoppingCardRepository.GetAll()
                 .Where(p =>
-                p.CID == shoppingCardView.CustomerID &&
+                p.UID == shoppingCardView.UserID &&
                 p.PID == shoppingCardView.ProductID
                 ).FirstOrDefault();
 
@@ -124,9 +124,9 @@ namespace Market.Service
             shoppingCards = (await _genericShoppingCardRepository.GetAllAsync())
                 .Select(c => new ShoppingCardViewModel
                 {
-                    CustomerID = c.CID.Trim(),
-                    ProductID = c.PID.Trim(),
-                    DeliveryScheduleID = c.SID.Trim(),
+                    UserID = c.UID,
+                    ProductID = c.PID,
+                    DeliveryScheduleID = c.SID,
                     Quantity = c.Quantity,
                     PurchasedDate = c.PurchasedDate
                 }).ToList();
@@ -139,22 +139,22 @@ namespace Market.Service
             return (await _genericShoppingCardRepository.GetAllAsync())
                 .Where
                 (
-                p => p.CID == shoppingCardView.CustomerID &&
+                p => p.UID == shoppingCardView.UserID &&
                 p.PID == shoppingCardView.ProductID
                 ).Count() != 0;
         }
 
-        public async Task<List<ShoppingCardViewModel>> GetShoppingCardByCustomerIDAsync(string customerID)
+        public async Task<List<ShoppingCardViewModel>> GetShoppingCardByCustomerIDAsync(int customerID)
         {
             List<ShoppingCardViewModel> customerShoppingCard;
 
             customerShoppingCard = (await _genericShoppingCardRepository.GetAllAsync())
-                .Where(s => s.CID.Trim() == customerID.Trim())
+                .Where(s => s.UID == customerID)
                 .Select(s => new ShoppingCardViewModel
                 {
-                    CustomerID = s.CID.Trim(),
-                    ProductID = s.PID.Trim(),
-                    DeliveryScheduleID = s.SID.Trim(),
+                    UserID = s.UID,
+                    ProductID = s.PID,
+                    DeliveryScheduleID = s.SID,
                     Quantity = s.Quantity,
                     PurchasedDate = s.PurchasedDate
                 }).ToList();
@@ -165,7 +165,7 @@ namespace Market.Service
         public async Task UpdateAsync(ShoppingCardViewModel shoppingCardView)
         {
             var shoppingCard = (await _genericShoppingCardRepository.GetAllAsync())
-                .Where(p => p.CID == shoppingCardView.CustomerID && p.PID == shoppingCardView.ProductID).FirstOrDefault();
+                .Where(p => p.UID == shoppingCardView.UserID && p.PID == shoppingCardView.ProductID).FirstOrDefault();
 
             if (shoppingCard is null)
             {
@@ -190,7 +190,7 @@ namespace Market.Service
             {
                 var shoppingCard = new ShoppingCardTable
                 {
-                    CID = shoppingCardView.CustomerID,
+                    UID = shoppingCardView.UserID,
                     PID = shoppingCardView.ProductID,
                     SID = shoppingCardView.DeliveryScheduleID,
                     PurchasedDate = DateTime.Now,
@@ -205,7 +205,7 @@ namespace Market.Service
         {
             var item = (await _genericShoppingCardRepository.GetAllAsync())
                 .Where(p =>
-                p.CID == shoppingCardView.CustomerID &&
+                p.UID == shoppingCardView.UserID &&
                 p.PID == shoppingCardView.ProductID
                 ).FirstOrDefault();
 

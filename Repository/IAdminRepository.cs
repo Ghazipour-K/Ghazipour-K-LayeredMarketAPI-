@@ -2,11 +2,11 @@
 
 namespace Market.Repository
 {
-    public interface IAdminRepository : IGenericRepository<AdminTable>
+    public interface IAdminRepository : IGenericRepository<UserTable>
     {
-        bool Login(string UserID, string Password);
+        UserTable Login(string UserName, string Password);
 
-        Task<bool> LoginAsync(string UserID, string Password);
+        Task<UserTable> LoginAsync(string UserName, string Password);
 
     }
 }

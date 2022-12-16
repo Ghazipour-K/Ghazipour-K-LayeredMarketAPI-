@@ -8,14 +8,14 @@ namespace Market.Service
     {
         List<ShoppingCardViewModel> GetAll();
         bool Find(ShoppingCardViewModel shoppingCardView);
-        List<ShoppingCardViewModel> GetShoppingCardByCustomerID(string customerID);
+        List<ShoppingCardViewModel> GetShoppingCardByCustomerID(int customerID);
         void Update(ShoppingCardViewModel shoppingCardView);
         void Add(ShoppingCardViewModel shoppingCardView);
         void Remove(ShoppingCardViewModel shoppingCardView);
 
         Task<List<ShoppingCardViewModel>> GetAllAsync();
         Task<bool> FindAsync(ShoppingCardViewModel shoppingCardView);
-        Task<List<ShoppingCardViewModel>> GetShoppingCardByCustomerIDAsync(string customerID);
+        Task<List<ShoppingCardViewModel>> GetShoppingCardByCustomerIDAsync(int customerID);
         Task UpdateAsync(ShoppingCardViewModel shoppingCardView);
         Task AddAsync(ShoppingCardViewModel shoppingCardView);
         Task RemoveAsync(ShoppingCardViewModel shoppingCardView);

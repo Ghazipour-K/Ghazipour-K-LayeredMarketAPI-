@@ -20,7 +20,7 @@ namespace Market.Repository
             this.ShoppingCardTables = new HashSet<ShoppingCardTable>();
         }
     
-        public string ID { get; set; }
+        public int ID { get; set; }
         public System.DateTime DeliveryDate { get; set; }
         public System.TimeSpan StartingDeliveryHour { get; set; }
         public System.TimeSpan EndingDeliveryHour { get; set; }

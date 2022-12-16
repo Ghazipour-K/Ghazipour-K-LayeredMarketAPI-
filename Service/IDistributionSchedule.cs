@@ -6,12 +6,12 @@ namespace Market.Service
 {
     public interface IDistributionSchedule
     {
-        bool Find(string scheduleID);
+        bool Find(int scheduleID);
         List<DistributionScheduleViewModel> GetAll();
-        void Add(DistributionScheduleViewModel scheduleView);
+        void Add(CreateDistributionScheduleViewModel scheduleView);
 
-        Task<bool> FindAsync(string scheduleID);
+        Task<bool> FindAsync(int scheduleID);
         Task<List<DistributionScheduleViewModel>> GetAllAsync();
-        Task AddAsync(DistributionScheduleViewModel scheduleView);
+        Task AddAsync(CreateDistributionScheduleViewModel scheduleView);
     }
 }

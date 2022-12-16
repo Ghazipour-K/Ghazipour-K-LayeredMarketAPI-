@@ -1,10 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using Market.Repository;
+using System.Threading.Tasks;
 
 namespace Market.Service
 {
     public interface IAdmin
     {
-        bool Login(string UserID, string Password);
-        Task<bool> LoginAsync(string UserID, string Password);
+        UserTable Login(string UserName, string Password);
+
+        Task<UserTable> LoginAsync(string UserName, string Password);
     }
 }

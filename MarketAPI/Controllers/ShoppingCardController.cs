@@ -13,7 +13,7 @@ namespace Market.Controller
         {
             _shoppingCardService = shoppingCardService;
         }
-
+        [Authorize(Roles ="Admin, User")]
         [Route("api/shopping-card")]
         [HttpGet]
         public async Task<IHttpActionResult> GetAllShoppingCardsAsycn()
@@ -21,15 +21,17 @@ namespace Market.Controller
             return Ok(await _shoppingCardService.GetAllAsync());
         }
 
+        [Authorize(Roles = "Admin, User")]
         [Route("api/customer/{customerID}/shopping-card")]
         [HttpGet]
-        public async Task<IHttpActionResult> GetShoppingCardByCustomerIDAsync(string customerID)
+        public async Task<IHttpActionResult> GetShoppingCardByCustomerIDAsync(int customerID)
         {
-            if (!ModelState.IsValid || customerID is null) return BadRequest("Bad request!");
+            if (!ModelState.IsValid) return BadRequest("Bad request!");
 
             return Ok(await _shoppingCardService.GetShoppingCardByCustomerIDAsync(customerID));
         }
 
+        [Authorize(Roles = "Admin, User")]
         [Route("api/shopping-card")]
         [HttpPost]
         public async Task<IHttpActionResult> PostAddItemToShoppingCardAsync(AddItemToShoppingCardCommand shoppingCardCommand)
@@ -40,9 +42,9 @@ namespace Market.Controller
             {
                 var shoppingCardView = new ShoppingCardViewModel
                 {
-                    CustomerID = shoppingCardCommand.CustomerID,
-                    DeliveryScheduleID = shoppingCardCommand.DeliveryScheduleID,
+                    UserID = shoppingCardCommand.CustomerID,
                     ProductID = shoppingCardCommand.ProductID,
+                    DeliveryScheduleID = shoppingCardCommand.DeliveryScheduleID,
                     Quantity = shoppingCardCommand.Quantity,
                     PurchasedDate = shoppingCardCommand.PurchasedDate
                 };
@@ -55,6 +57,7 @@ namespace Market.Controller
             }
         }
 
+        [Authorize(Roles = "Admin, User")]
         [Route("api/shopping-card")]
         [HttpDelete]
         public async Task<IHttpActionResult> DeleteItemFromShoppingCardAsync(DeleteItemFromShoppingCardCommand shoppingCardCommand)
@@ -65,7 +68,7 @@ namespace Market.Controller
             {
                 var shoppingCardView = new ShoppingCardViewModel
                 {
-                    CustomerID = shoppingCardCommand.CustomerID,
+                    UserID = shoppingCardCommand.CustomerID,
                     ProductID = shoppingCardCommand.ProductID
                 };
                 await _shoppingCardService.RemoveAsync(shoppingCardView);

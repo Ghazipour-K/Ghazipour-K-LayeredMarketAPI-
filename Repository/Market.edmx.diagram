@@ -4,16 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="360f241942454cbe9f0761c6eebe1a94" Name="Diagram1">
-        <EntityTypeShape EntityType="MarketModel.AdminTable" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MarketModel.CustomerTable" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MarketModel.DistributionScheduleTable" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MarketModel.ProductTable" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MarketModel.ShoppingCardTable" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="MarketModel.sysdiagram" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
-        <AssociationConnector Association="MarketModel.FK_ShoppingBasketTable_CustomerTable" ManuallyRouted="false" />
+      <Diagram DiagramId="b69a56db51554de8889bb2bd247dca0e" Name="Diagram1">
+        <EntityTypeShape EntityType="MarketModel.DistributionScheduleTable" Width="2.125" PointX="0.5" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MarketModel.ProductTable" Width="2" PointX="0.5" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MarketModel.ShoppingCardTable" Width="2.625" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="MarketModel.sysdiagram" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MarketModel.UserTable" Width="1.875" PointX="0.75" PointY="7.25" IsExpanded="true" />
         <AssociationConnector Association="MarketModel.FK_ShoppingCardTable_DistributionScheduleTable" ManuallyRouted="false" />
         <AssociationConnector Association="MarketModel.FK_ShoppingBasketTable_ProductTable" ManuallyRouted="false" />
+        <AssociationConnector Association="MarketModel.FK_ShoppingCardTable_UserTable" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

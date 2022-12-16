@@ -26,6 +26,7 @@ namespace Market
             container.RegisterType<IShoppingCard, ShoppingCard>();
             container.RegisterType<IDistributionSchedule, DistributionSchedule>();
 
+            //container.RegisterType<IAuthorizationServerProvider, AuthorizationServerProvider>();
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }
     }

@@ -2,10 +2,10 @@
 
 namespace Market.Repository
 {
-    public interface ICustomerRepository: IGenericRepository<CustomerTable>
+    public interface ICustomerRepository: IGenericRepository<UserTable>
     {
-        bool Login(string UserID, string Password);
+        UserTable Login(string UserName, string Password);
 
-        Task<bool> LoginAsync(string UserID, string Password);
+        Task<UserTable> LoginAsync(string UserName, string Password);
     }
 }

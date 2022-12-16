@@ -4,38 +4,24 @@ using System.Threading.Tasks;
 
 namespace Market.Repository
 {
-    public class CustomerRepository : GenericRepository<CustomerTable>, ICustomerRepository
+    public class CustomerRepository : GenericRepository<UserTable>, ICustomerRepository
     {
         public CustomerRepository(MarketEntities market) : base(market)
         {
         }
 
-        public bool Login(string UserID, string Password)
+        public UserTable Login(string UserName, string Password)
         {
-            var result = _market.CustomerTables.Where(c => c.ID.ToLower() == UserID && c.Pass == Password).FirstOrDefault();
+            var result = _market.UserTables.Where(c => c.UserName == UserName && c.UserPassword == Password).FirstOrDefault();
 
-            if (result != null)
-            {
-                return true;//Login Succecfull
-            }
-            else
-            {
-                return false;//Invalid Credentials
-            }
+            return result;
         }
 
-        public async Task<bool> LoginAsync(string UserID, string Password)
+        public async Task<UserTable> LoginAsync(string UserName, string Password)
         {
-            var result = await _market.CustomerTables.Where(c => c.ID.ToLower() == UserID && c.Pass == Password).FirstOrDefaultAsync();
+            var result = await _market.UserTables.Where(c => c.UserName == UserName && c.UserPassword == Password).FirstOrDefaultAsync();
 
-            if (result != null)
-            {
-                return true;//Login Succecfull
-            }
-            else
-            {
-                return false;//Invalid Credentials
-            }
+            return result;
         }
     }
 }

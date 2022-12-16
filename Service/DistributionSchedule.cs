@@ -16,7 +16,7 @@ namespace Market.Service
             _genericDistributionScheduleRepository = repository;
         }
 
-        public bool Find(string scheduleID)
+        public bool Find(int scheduleID)
         {
             var result = _genericDistributionScheduleRepository.GetById(scheduleID) == null ? false : true;
 
@@ -30,7 +30,7 @@ namespace Market.Service
                 .Select(
                 s => new DistributionScheduleViewModel
                 {
-                    ID = s.ID,
+                    DistributionScheduleID = s.ID,
                     DeliveryDate = s.DeliveryDate,
                     StartingDeliveryHour = s.StartingDeliveryHour,
                     EndingDeliveryHour = s.EndingDeliveryHour
@@ -38,28 +38,21 @@ namespace Market.Service
             return distributionSchedules;
         }
 
-        public void Add(DistributionScheduleViewModel scheduleView)
+        public void Add(CreateDistributionScheduleViewModel scheduleView)
         {
-            if (Find(scheduleView.ID))
-            {
-                throw new Exception("Schedule already exists!");
-            }
-            else
-            {
-                var schedule = new DistributionScheduleTable
-                {
-                    ID = scheduleView.ID,
-                    DeliveryDate = scheduleView.DeliveryDate,
-                    StartingDeliveryHour = scheduleView.StartingDeliveryHour,
-                    EndingDeliveryHour = scheduleView.EndingDeliveryHour
-                };
 
-                _genericDistributionScheduleRepository.Insert(schedule);
-                _genericDistributionScheduleRepository.Save();
-            }
+            var schedule = new DistributionScheduleTable
+            {
+                DeliveryDate = scheduleView.DeliveryDate,
+                StartingDeliveryHour = scheduleView.StartingDeliveryHour,
+                EndingDeliveryHour = scheduleView.EndingDeliveryHour
+            };
+
+            _genericDistributionScheduleRepository.Insert(schedule);
+            _genericDistributionScheduleRepository.Save();
         }
 
-        public async Task<bool> FindAsync(string scheduleID)
+        public async Task<bool> FindAsync(int scheduleID)
         {
             var result = await _genericDistributionScheduleRepository.GetByIdAsync(scheduleID) == null ? false : true;
 
@@ -75,7 +68,7 @@ namespace Market.Service
                     .Select(
                     s => new DistributionScheduleViewModel
                     {
-                        ID = s.ID,
+                        DistributionScheduleID = s.ID,
                         DeliveryDate = s.DeliveryDate,
                         StartingDeliveryHour = s.StartingDeliveryHour,
                         EndingDeliveryHour = s.EndingDeliveryHour
@@ -88,31 +81,23 @@ namespace Market.Service
             }
         }
 
-        public async Task AddAsync(DistributionScheduleViewModel scheduleView)
+        public async Task AddAsync(CreateDistributionScheduleViewModel scheduleView)
         {
-            if (await FindAsync(scheduleView.ID))
+            try
             {
-                throw new Exception("Schedule already exists!");
-            }
-            else
-            {
-                try
+                var schedule = new DistributionScheduleTable
                 {
-                    var schedule = new DistributionScheduleTable
-                    {
-                        ID = scheduleView.ID,
-                        DeliveryDate = scheduleView.DeliveryDate,
-                        StartingDeliveryHour = scheduleView.StartingDeliveryHour,
-                        EndingDeliveryHour = scheduleView.EndingDeliveryHour
-                    };
+                    DeliveryDate = scheduleView.DeliveryDate,
+                    StartingDeliveryHour = scheduleView.StartingDeliveryHour,
+                    EndingDeliveryHour = scheduleView.EndingDeliveryHour
+                };
 
-                    _genericDistributionScheduleRepository.Insert(schedule);
-                    await _genericDistributionScheduleRepository.SaveAsync();
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(ex.Message);
-                }
+                _genericDistributionScheduleRepository.Insert(schedule);
+                await _genericDistributionScheduleRepository.SaveAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
     }

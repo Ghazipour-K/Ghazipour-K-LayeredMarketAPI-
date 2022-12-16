@@ -25,11 +25,10 @@ namespace Market.Repository
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<AdminTable> AdminTables { get; set; }
-        public virtual DbSet<CustomerTable> CustomerTables { get; set; }
         public virtual DbSet<DistributionScheduleTable> DistributionScheduleTables { get; set; }
         public virtual DbSet<ProductTable> ProductTables { get; set; }
         public virtual DbSet<ShoppingCardTable> ShoppingCardTables { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<UserTable> UserTables { get; set; }
     }
 }

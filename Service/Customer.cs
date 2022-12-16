@@ -5,10 +5,10 @@ namespace Market.Service
 {
     public class Customer:ICustomer
     {
-        private readonly IGenericRepository<CustomerTable> _genericCustomerRepository = null;
+        private readonly IGenericRepository<UserTable> _genericCustomerRepository = null;
         private readonly ICustomerRepository _customerRepository = null;
 
-        public Customer(IGenericRepository<CustomerTable> repository)
+        public Customer(IGenericRepository<UserTable> repository)
         {
             _genericCustomerRepository = repository;
         }
@@ -18,14 +18,14 @@ namespace Market.Service
             _customerRepository = repository;
         }
 
-        public bool Login(string UserID, string Password)
+        public UserTable Login(string UserName, string Password)
         {
-            return _customerRepository.Login(UserID, Password);
+            return _customerRepository.Login(UserName, Password);
         }
 
-        public async Task<bool> LoginAsync(string UserID, string Password)
+        public async Task<UserTable> LoginAsync(string UserName, string Password)
         {
-            return await _customerRepository.LoginAsync(UserID, Password);
+            return await _customerRepository.LoginAsync(UserName, Password);
 
         }
     }

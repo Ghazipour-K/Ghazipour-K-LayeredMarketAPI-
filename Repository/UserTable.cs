@@ -12,17 +12,18 @@ namespace Market.Repository
     using System;
     using System.Collections.Generic;
     
-    public partial class CustomerTable
+    public partial class UserTable
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CustomerTable()
+        public UserTable()
         {
             this.ShoppingCardTables = new HashSet<ShoppingCardTable>();
         }
     
-        public string ID { get; set; }
-        public string Name { get; set; }
-        public string Pass { get; set; }
+        public int UserID { get; set; }
+        public string UserName { get; set; }
+        public string UserPassword { get; set; }
+        public string UserRole { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ShoppingCardTable> ShoppingCardTables { get; set; }

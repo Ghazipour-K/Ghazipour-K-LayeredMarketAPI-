@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Results;
 using Market.Model;
 using Market.Service;
 
@@ -18,6 +16,7 @@ namespace Market.Controller
             _productService = productService;
         }
 
+        [Authorize(Roles = "Admin, User")]
         [Route("{productId}")]
         [HttpGet]
         public async Task<IHttpActionResult> GetProductByIDAsync(string productId)
@@ -32,6 +31,7 @@ namespace Market.Controller
             }
         }
 
+        [Authorize(Roles = "Admin, User")]
         [Route("")]
         [HttpGet]
         public async Task<IHttpActionResult> GetAllProductsAsync()
@@ -39,6 +39,7 @@ namespace Market.Controller
             return Ok(await _productService.GetAllAsync());
         }
 
+        [Authorize(Roles = "Admin")]
         [Route("")]
         [HttpPost]
         public async Task<IHttpActionResult> PostCreateProductAsync(CreateProductCommand productCommand)
@@ -47,23 +48,14 @@ namespace Market.Controller
 
             try
             {
-                var productView = new ProductViewModel
+                var productView = new CreateProductViewModel
                 {
-                    ID = productCommand.ID,
-                    Name = productCommand.Name,
-                    Price = productCommand.Price
+                    ProductName = productCommand.Name,
+                    ProductPrice = productCommand.Price
                 };
-
-
-                if (await _productService.FindAsync(productCommand.ID))
-                {
-                    return BadRequest("Product already exists.");
-                }
-                else
-                {
-                    await _productService.AddAsync(productView);
-                    return Ok("Product added successfully.");
-                }
+                
+                await _productService.AddAsync(productView);
+                return Ok("Product added successfully.");
             }
             catch (Exception ex)
             {

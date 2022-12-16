@@ -51,13 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminRepository.cs" />
-    <Compile Include="AdminTable.cs">
-      <DependentUpon>Market.tt</DependentUpon>
-    </Compile>
     <Compile Include="CustomerRepository.cs" />
-    <Compile Include="CustomerTable.cs">
-      <DependentUpon>Market.tt</DependentUpon>
-    </Compile>
     <Compile Include="DistributionScheduleTable.cs">
       <DependentUpon>Market.tt</DependentUpon>
     </Compile>
@@ -90,13 +84,16 @@
     <Compile Include="sysdiagram.cs">
       <DependentUpon>Market.tt</DependentUpon>
     </Compile>
+    <Compile Include="UserTable.cs">
+      <DependentUpon>Market.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
     <EntityDeploy Include="Market.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Market.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="App.Config" />
     <None Include="Market.edmx.diagram">
       <DependentUpon>Market.edmx</DependentUpon>
     </None>

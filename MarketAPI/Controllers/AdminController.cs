@@ -19,7 +19,7 @@ namespace Market.Controller
         {
             if (ModelState.IsValid && !(loginCommand is null))
             {
-                if (await _adminService.LoginAsync(loginCommand.ID, loginCommand.Pass))
+                if (await _adminService.LoginAsync(loginCommand.UserName, loginCommand.Password) != null)
                 {
                     return Ok("Login Succecfull.");
                 }

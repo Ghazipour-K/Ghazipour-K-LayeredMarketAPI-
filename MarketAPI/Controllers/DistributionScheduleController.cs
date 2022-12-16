@@ -15,6 +15,7 @@ namespace Market.Controller
             _distributionScheduleService = distributionScheduleService;
         }
 
+        [Authorize(Roles = "Admin, User")]
         [Route("")]
         [HttpGet]
         public async Task<IHttpActionResult> GetAllSchedulesAsync()
@@ -22,6 +23,7 @@ namespace Market.Controller
             return Ok(await _distributionScheduleService.GetAllAsync());
         }
 
+        [Authorize(Roles = "Admin")]
         [Route("")]
         [HttpPost]
         public async Task<IHttpActionResult> PostAddNewDistributionScheduleAsync(CreateDistributionScheduleCommand scheduleCommand)
@@ -30,9 +32,8 @@ namespace Market.Controller
 
             try
             {
-                var scheduleView = new DistributionScheduleViewModel()
+                var scheduleView = new CreateDistributionScheduleViewModel()
                 {
-                    ID = scheduleCommand.ID,
                     DeliveryDate = scheduleCommand.DeliveryDate,
                     StartingDeliveryHour = scheduleCommand.StartingDeliveryHour,
                     EndingDeliveryHour = scheduleCommand.EndingDeliveryHour

@@ -7,14 +7,14 @@ namespace Market.Service
     public interface IProduct
     {
         List<ProductViewModel> GetAll();
-        bool Find(string PoductId);
-        void Update(ProductViewModel productView);
-        void Add(ProductViewModel productView);
+        bool Find(int PoductId);
+        void Update(CreateProductViewModel productView);
+        void Add(CreateProductViewModel productView);
 
-        Task<bool> FindAsync(string PoductId);
+        Task<bool> FindAsync(int PoductId);
         Task<List<ProductViewModel>> GetAllAsync();
-        Task UpdateAsync(ProductViewModel productView);
-        Task AddAsync(ProductViewModel productView);
+        Task UpdateAsync(CreateProductViewModel productView);
+        Task AddAsync(CreateProductViewModel productView);
         Task<ProductViewModel> GetByIDAsync(string PoductId);
     }
 }

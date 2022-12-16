@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminViewModel.cs" />
+    <Compile Include="CreateDistributionScheduleViewModel.cs" />
+    <Compile Include="CreateProductViewModel.cs" />
     <Compile Include="CustomerViewModel.cs" />
     <Compile Include="DistributionScheduleViewModel.cs" />
     <Compile Include="ProductViewModel.cs" />
